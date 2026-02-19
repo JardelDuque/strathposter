@@ -1,7 +1,6 @@
-\documentclass[pdftex
-              ,a0paper
+\documentclass[a0paper
               ,fontscale=0.25
-              ,landscape
+              ,portrait
               ,final]{baposter}
 
 % -- Imports
@@ -9,12 +8,51 @@
 \usepackage{fixmath}
 \usepackage[fleqn,tbtags]{mathtools}
 \usepackage[all,error]{onlyamsmath}
+\usepackage[numbers,sort&compress]{natbib}
 
 \usepackage{strathclyde-colours}
-\usepackage[columns=4,maincolour=strath-green]{strathclyde-poster}
+\usepackage[columns=3,maincolour=strath-blue-light]{strathclyde-poster}
 
-\usepackage{lmodern}
+% -- University of Strathclyde Brand Fonts
+% Using fontspec to load custom fonts (requires XeLaTeX or LuaLaTeX)
+\usepackage{fontspec}
 \usepackage{multicol}
+
+% Try to load University brand fonts with fallback to Arial
+\IfFontExistsTF{KF Meta OT}{%
+  % University Brand Fonts (KF Meta OT and ClanOT)
+  % Let fontspec auto-detect the font variants
+  \setmainfont{KF Meta OT}
+  \setsansfont{KF Meta OT}  % Ensure \sffamily also uses corporate font
+  
+  \newfontfamily\clanblack{ClanOT-Black}
+  \newfontfamily\clanbold{ClanOT-Bold}
+  \newfontfamily\clanmedium{ClanOT-Medium}
+  
+  \typeout{========================================================}
+  \typeout{SUCCESS: Using University of Strathclyde brand fonts}
+  \typeout{Body text: KF Meta OT}
+  \typeout{Headlines: ClanOT (Black, Bold, Medium)}
+  \typeout{========================================================}
+}{%
+  % FALLBACK: Use Arial (WARNING: Not compliant with brand guidelines!)
+  \setmainfont{Arial}
+  \setsansfont{Arial}
+  \newfontfamily\clanblack{Arial}
+  \newfontfamily\clanbold{Arial}
+  \newfontfamily\clanmedium{Arial}
+  \typeout{========================================================}
+  \typeout{WARNING: University brand fonts NOT found!}
+  \typeout{Using Arial as temporary fallback.}
+  \typeout{See FONTS_README.md to install KF Meta OT and ClanOT fonts.}
+  \typeout{Contact marketing@strath.ac.uk for font files.}
+  \typeout{========================================================}
+}
+
+% Define custom commands for easy font switching
+\newcommand{\headline}[1]{{\clanblack\Large\bfseries #1}}
+\newcommand{\subheading}[1]{{\clanbold\large\bfseries #1}}
+\newcommand{\callout}[1]{{\clanmedium\large #1}}
 
 % -- Preamble
 \graphicspath{{image/},{figure/},{logo/}}
@@ -41,93 +79,179 @@
 
 \author{Superawesome Researcher Fellow}
 
-\institute{Mathematical Structured Programming, University of Strathclyde}
+\institute{Civil and Environmental Engineering, University of Strathclyde}
 
 \logoright{\includegraphics
                  [height=0.08\paperheight]
-                 {strath_science}}
+                 {strath_engineering}}
 
 \begin{document}
 \begin{strathclydeposter}
 
-\begin{posterbox}[name=research,column=0]{A}
-\begin{verbatim}
-a
-\end{verbatim}
+%==============================================================================
+
+\begin{posterbox}[name=intro,column=0]{Introduction}
+\headline{Research Overview}
+
+This is body text using \textbf{Meta OT Normal}. This font should be used for all body copy in designed materials.
+
+\textbf{Important points} can be emphasized using \textbf{Meta OT Bold} within the body text.
+
+\callout{This is a callout using ClanOT Medium} for highlighting key information.
 \end{posterbox}
 
-\begin{posterbox}[name=aa,column=3]{A}
+% \begin{posterbox}[name=aa,column=3]{A}
 
+% \end{posterbox}
+
+%==============================================================================
+
+\begin{posterbox}[name=motiv,below=intro,column=0]{Motivation}
+\subheading{Why This Research Matters}
+
+Regular body text provides detailed explanations using Meta OT Normal. This ensures consistency with University brand guidelines.
+
+Key findings and \textbf{bold statements} use Meta OT Bold for emphasis.
 \end{posterbox}
+
+%==============================================================================
+
+\begin{posterbox}[name=method
+                ,span=2
+                ,column=1]{Methodology}
+\headline{Our Innovative Approach}
+
+\subheading{Phase 1: Data Collection}
+
+Body text explaining the methodology in detail. The combination of Meta OT for body copy and ClanOT for headings creates a clear visual hierarchy.
+
+You can also include some citations of relevant literature \cite{smith2022}.
+
+\subheading{Phase 2: Analysis}
+
+\callout{"Bold insights require bold typography"} — quotations and callout text use ClanOT Medium or Bold.
+
+Continued explanation in regular body text...
+\end{posterbox}
+
+%==============================================================================
 
 \begin{posterbox}
   [ name=message
+  , below=method
   , column=1
   , span=2
   , textborder=rounded
   , headerborder=closed
   , headershape=rounded
   , boxshade=plain
-  , boxColorOne=strath-green
+  , boxColorOne=strath-blue-light
   , textfont=\sffamily\large\color{white}
   ]{\phantom{a}}
 
   \begin{center}
-    aaa
-
-
-
-    aaa
+    This is a highlighted message box using the main colour (In this case, the light blue for the Faculty of Engineering).
+    It can be used for key messages or to draw attention to important information. 
+    The text is white for contrast.
   \end{center}
   \vspace{1em}
 \end{posterbox}
 
+%==============================================================================
 
-%\begin{posterbox}[name=motiv,below=research,column=0]{B}
-%
-%\end{posterbox}
-%
-%\begin{posterbox}[name=cards
-%                 ,span=2
-%                 ,column=1]{C}
-%\end{posterbox}
-%
-%\begin{posterbox}[name=goodness
-%                 ,below=motiv
-%                 ]{D}
-%
-%\end{posterbox}
-%
-%
-%\begin{posterbox}[name=presentation
-%                 ,below=cards
-%                 ,column=2]{E}
-%\end{posterbox}
-%
-%
-%
-%\begin{posterbox}[name=quality
-%                 ,below=cards
-%                 ,column=1
-%                 ,above=bottom]{F}
-%\end{posterbox}
-%
-%\begin{posterbox}[name=eval
-%                 ,below=goodness, above=bottom]{G}
-%\end{posterbox}
+\begin{posterbox}[name=results
+                ,below=motiv
+                ]{Results}
+\headline{Key Findings}
+
+Detailed results are presented in Meta OT Normal, ensuring readability and brand consistency.
+
+\textbf{Significant outcomes} are highlighted using Meta OT Bold within the text flow.
+\end{posterbox}
+
+%==============================================================================
+
+\begin{posterbox}[name=discussion
+                ,below=message
+                ,column=2]{Discussion}
+
+{\clanblack Impact:} Using ClanOT Black for dramatic emphasis on single words or short phrases.
+
+Followed by explanatory body text in Meta OT. 
+
+You can also include figures in the poster, as in Figure~\ref{fig:example_image} below.
+
+% Figure example using graphicx package ------------------------------------------
+\begin{center}
+\includegraphics[width=0.9\textwidth]{fig_supply_chain_plot.pdf}\\
+\vspace{0.5em}
+\captionof{figure}{Example image}
+\label{fig:example_image}
+\end{center}
+% -------------------------------------------------------------------------------
+
+\end{posterbox}
+
+%==============================================================================
+
+\begin{posterbox}[name=validation
+                ,below=message
+                ,column=1
+                ,above=bottom]{Validation}
+\subheading{Quality Assurance}
+
+Body text with mathematical notation: $E = mc^2$
+
+The fonts work seamlessly with equations and technical content while maintaining brand identity.
+\end{posterbox}
+
+%==============================================================================
+
+\begin{posterbox}[name=conclusions
+                ,below=results, above=bottom]{Conclusions}
+\callout{Future Directions}
+
+Concluding remarks in Meta OT Normal complete the research narrative.
+\end{posterbox}
+
+%==============================================================================
+
+\begin{posterbox}[name=funding
+                ,below=discussion
+                ,column=2
+                ,headerborder=none
+                ,textborder=none]{}
+\vspace{-0.75em}
+\begin{singlespace}\smaller[2]
+Funding: This research was funded by the Super Awesome Research Council (SARC) under grant number 123456. We would like to thank SARC for their support and funding, which made this research possible.
+\end{singlespace}
+\end{posterbox}
+
+%==============================================================================
+
+\begin{posterbox}[name=references
+                ,below=funding
+                ,column=2
+                ,above=bottom
+                ,headerborder=none
+                ,textborder=none]{}
+\vspace{-0.5em}
 
 
-% \begin{posterbox}[name=funding
-%                 ,below=presentation
-%                 ,column=2
-%                 ,above=bottom
-%                 ,headerborder=none
-%                 ,textborder=none]{}
-%\vspace{-0.75em}
-%\begin{singlespace}\smaller[2]
-%
-%\end{singlespace}
-%\end{posterbox}
+
+\begin{singlespace}\smaller[2]
+{\clanblack\small References}
+\begingroup
+\setlength{\bibsep}{0pt}
+\renewcommand{\bibsection}{}
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+\endgroup
+\end{singlespace}
+\end{posterbox}
+
+%==============================================================================
+
 \end{strathclydeposter}
 \end{document}
 

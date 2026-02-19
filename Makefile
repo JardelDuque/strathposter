@@ -3,7 +3,7 @@
 # -- [ Options ]
 
 LATEXMK      := latexmk
-LATEXMK_OPTS := -pdf -bibtex -outdir="__build"
+LATEXMK_OPTS := -xelatex -bibtex -outdir="__build"
 
 SOURCES := ${shell ls *.tex}
 

@@ -3,6 +3,7 @@
 advert.pdf
 __build/
 output/
+.vscode/
 syntax: glob
 *eps-converted-to.pdf*
 *.upb
@@ -51,6 +52,7 @@ auto/
 *.toc
 *.vrb
 *.xdy
+*.xdv
 *~
 ._DS_Store
 auto/

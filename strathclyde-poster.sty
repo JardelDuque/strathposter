@@ -22,7 +22,13 @@
 \RequirePackage{comment}
 %% Fonts
 \RequirePackage[T1]{fontenc}
-\RequirePackage[protrusion=true, expansion=true]{microtype}
+% Microtype: expansion doesn't work with XeTeX, only protrusion
+\RequirePackage{ifxetex}
+\ifxetex
+  \RequirePackage[protrusion=true]{microtype}
+\else
+  \RequirePackage[protrusion=true, expansion=true]{microtype}
+\fi
 \RequirePackage[scaled]{helvet}
 \RequirePackage{xspace}
 % Colours
@@ -50,7 +56,8 @@
 %% ----------------------------------------------------------------- [ Styling ]
 
 \newcommand{\setHeaderFontStyle}[1]{\gdef\@headerFontStyle{#1}}
-\setHeaderFontStyle{\Large\sffamily\bfseries}
+% Use ClanOT Bold for posterbox headers (brand compliance)
+\setHeaderFontStyle{\Large\clanbold\bfseries}
 
 \newcommand{\setBodyFontStyle}[1]{\gdef\@bodyFontStyle{#1}}
 \setBodyFontStyle{\large\sffamily}
@@ -129,9 +136,11 @@
 %% ------------------------------------------------------------- [ Eye Catcher ]
 {\ifthenelse{\boolean{STRATH@leftlogo}}{\@logocommandleft}{}}
 %% ------------------------------------------------------------------- [ Title ]
-{\sffamily\huge\@title\vspace{0.2em}}
+% Use ClanOT Black for main poster title (brand compliance)
+{\clanblack\huge\bfseries\@title\vspace{0.2em}}
 %% ----------------------------------------------------------------- [ Authors ]
-{\sffamily\large\@author\\[0.1em]\@institute}
+% Use ClanOT Medium for author names and affiliation (brand compliance)
+{\clanmedium\large\@author\\[0.1em]{\normalsize\@institute}}
 %% -------------------------------------------------------------------- [ Logo ]
 {\@logocommandright}}
 {\end{poster}}
